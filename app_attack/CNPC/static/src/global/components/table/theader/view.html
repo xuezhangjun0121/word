@@ -1,0 +1,36 @@
+<div class="sti-table-header">
+	<table cellspacing="0" cellpadding="0" border="0">
+		<colgroup>
+        	<col v-for="(col, index) in cols" 
+        		:width="index == cols.length - 1 && !scrollX && scrollY 
+        		? col.realWidth - scrollBar 
+        		: col.realWidth"/>
+        	<col :width="scrollBar" v-if="scrollY"/>
+    	</colgroup>
+		<thead>
+			<tr>
+				<th  
+					:class="{filterable: filterabled && filterId === col.id}" 
+					v-for="col in cols"
+					@click="enableFilter(col)">
+					<input 
+						v-if="col.type == 'checkbox'"
+						type="checkbox" 
+						v-model="checkState" 
+						@click="checkAll" >
+					<template v-else>
+						{{col.label}}
+						<span 
+							v-if="col.sortable" class="header-sort" @click.stop="sortCol(col)">
+							<i class="fa fa-sort-asc" 
+								:class="{active: col.id == curSortCol && !col.desc}"></i>
+							<i class="fa fa-sort-desc" 
+								:class="{active: col.id == curSortCol && col.desc}"></i>
+						</span>
+					</template>
+				</th>
+				<th v-if="scrollY"></th>
+			</tr>
+		</thead>
+	</table>
+</div>

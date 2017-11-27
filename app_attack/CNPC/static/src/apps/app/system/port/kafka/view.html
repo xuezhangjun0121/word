@@ -1,0 +1,54 @@
+<div class="port_kafka">
+    <!--弹框-->
+    <md-dialog-alert
+            :md-title="alert.title"
+            :md-content-html="alert.contentHtml"
+            :md-ok-text="alert.ok"
+            @open="onOpen"
+            @close="onClose"
+            ref="dialog1">
+    </md-dialog-alert>
+
+    <div style="padding: 15px">
+        <div class="port-data">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>KAFKA数据接入</th>
+                </tr>
+                </thead>
+            </table>
+            <form class="form-inline text-right">
+                <div class="form-group">
+
+                    <sti-button @clickevent="addKafka">{{$t('button.add')}}</sti-button>
+                    <!--<sti-button @clickevent="editKafka">{{$t('button.edit')}}</sti-button>-->
+                    <sti-button @clickevent="deleteKafka">{{$t('button.delete')}}</sti-button>
+                </div>
+            </form>
+            <sti-table
+
+                    :datas="datasKafka"
+                    init-sort="port"
+                    ref="tableKafka"
+                    @check="kafkaAdd"
+            >
+                <!--设置选择列-->
+                <sti-column id="id" width="50" type="checkbox"></sti-column>
+                <sti-column id="ip" label="IP地址" filterable></sti-column>
+                <sti-column id="port" label="端口" width="100" filterable></sti-column>
+                <!--<sti-column id="topic" label="主题" width="100" filterable></sti-column>-->
+                <!--<sti-column id="username" label="用户名" width="100" filterable></sti-column>-->
+                <!--<sti-column id="password" label="密码" filterable></sti-column>-->
+                <sti-column id="queuename" label="列队名" filterable></sti-column>
+                <sti-column id="operate" width="100" label="编辑">
+                    <!--&lt;!&ndash;设置模板列&ndash;&gt;-->
+                    <template scope="colData">
+
+                        <i class="fa fa-pencil-square-o" aria-hidden="true" @click="editKafka(colData)"></i>
+                    </template>
+                </sti-column>
+            </sti-table>
+        </div>
+    </div>
+</div>

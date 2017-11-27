@@ -1,0 +1,59 @@
+<div class="system-user">
+    <!--弹框-->
+    <md-dialog-alert
+            :md-title="alert.title"
+            :md-content-html="alert.contentHtml"
+            :md-ok-text="alert.ok"
+            @open="onOpen"
+            @close="onClose"
+            ref="dialog1">
+    </md-dialog-alert>
+
+    <div style="padding: 15px">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>用户管理</th>
+            </tr>
+            </thead>
+        </table>
+        <form class="form-inline text-right">
+            <div class="form-group">
+                <router-link to="/system/user/adduser/">
+                    <sti-button>{{$t('button.add')}}</sti-button>
+                </router-link>
+
+                <!--<sti-button @clickevent="editUsers">{{$t('button.edit')}}</sti-button>-->
+                <sti-button @clickevent="deleteUsers">{{$t('button.delete')}}</sti-button>
+            </div>
+        </form>
+        <!--init-sort="id"-->
+        <sti-table
+
+                url="/system_manage/users/"
+                ref="tableUsers"
+                @check="add"
+        >
+            <!--设置展开列-->
+            <!--<sti-column id="id" width="50" type="expand">
+
+                <template scope="colData">
+
+                    <span>{{colData.data.id}}</span>
+                </template>
+            </sti-column>-->
+            <!--设置选择列-->
+            <sti-column id="id" width="50" type="checkbox"></sti-column>
+            <sti-column id="username" label="姓名"></sti-column>
+            <sti-column id="name" label="角色"></sti-column>
+            <sti-column id="perm_data" label="权限"></sti-column>
+            <sti-column id="operate" width="100" label="编辑">
+                <!--&lt;!&ndash;设置模板列&ndash;&gt;-->
+                <template scope="colData">
+
+                    <i class="fa fa-pencil-square-o" aria-hidden="true" @click="editUsers(colData)"></i>
+                </template>
+            </sti-column>
+        </sti-table>
+    </div>
+</div>

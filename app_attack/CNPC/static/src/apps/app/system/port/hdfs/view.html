@@ -1,0 +1,61 @@
+<div class="port_hdfs">
+
+    <!--弹框-->
+    <md-dialog-alert
+            :md-title="alert.title"
+            :md-content-html="alert.contentHtml"
+            :md-ok-text="alert.ok"
+            @open="onOpen"
+            @close="onClose"
+            ref="dialog1">
+    </md-dialog-alert>
+
+    <div style="padding: 15px">
+        <div class="port-data">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>HDFS数据接入</th>
+                </tr>
+                </thead>
+            </table>
+            <form class="form-inline text-right">
+                <div class="form-group">
+                    <sti-button  @clickevent="addHdfs">{{$t('button.add')}}</sti-button>
+
+                    <!--<sti-button @clickevent="editHdfs">{{$t('button.edit')}}</sti-button>-->
+                    <sti-button @clickevent="deleteHdfs">{{$t('button.delete')}}</sti-button>
+                </div>
+            </form>
+            <sti-table
+
+                    :datas="datasHdfs"
+                    init-sort="port"
+                    ref="tableHdfs"
+                    @check="hdfsAdd"
+            >
+                <!--设置选择列-->
+                <sti-column id="id" width="50" type="checkbox"></sti-column>
+                <sti-column id="ip" label="IP地址" filterable></sti-column>
+                <sti-column id="port" label="端口" width="100" filterable></sti-column>
+                <!--<sti-column id="username" label="用户名" width="100" filterable></sti-column>-->
+                <!--<sti-column id="password" label="密码" width="100" filterable></sti-column>-->
+                <sti-column id="file_path" label="文件路径" filterable></sti-column>
+                <!--<sti-column id="operate" label="启用状态">
+                    &lt;!&ndash;设置模板列&ndash;&gt;
+                    <template scope="colData">
+
+                        <sti-switch @clickevent="hdfsSwitch(colData)" type="primary" :checked-status.sync="colData.data.enable"></sti-switch>
+                    </template>
+                </sti-column>-->
+                <sti-column id="operate" width="100" label="编辑">
+                    <!--&lt;!&ndash;设置模板列&ndash;&gt;-->
+                    <template scope="colData">
+
+                        <i class="fa fa-pencil-square-o" aria-hidden="true" @click="editHdfs(colData)"></i>
+                    </template>
+                </sti-column>
+            </sti-table>
+        </div>
+    </div>
+</div>

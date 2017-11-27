@@ -1,0 +1,51 @@
+/**
+ * default
+ */
+@import '../base/variables.less';
+@import '../base/mixins.less';
+
+.sti-web.default {
+
+	color: @google-color;
+	background-color: @google-bbg-color;
+
+	.sti-header {
+
+		color: @google-htext-color;
+		background-color: @google-hbg-color;
+		//background-image: linear-gradient(to bottom, @google-hbg-color, @google-hbg-dark-color);
+		//background-repeat: repeat-x;
+	}
+
+	.sti-aside {
+
+		background-color: @google-mbg-color;
+	}
+
+	.md-icon-button {
+
+		.sti-icon {
+
+			color: @google-htext-color;
+		}
+	}
+}
+
+.md-theme-default {
+
+	.md-snackbar.notice {
+
+		.md-snackbar-container {
+
+			background-color: @default-notice-color;
+		}
+	}
+
+	.md-snackbar.alert {
+
+		.md-snackbar-container {
+
+			background-color: @default-alert-color;
+		}
+	}
+}

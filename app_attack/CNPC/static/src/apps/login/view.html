@@ -1,0 +1,26 @@
+<transition name="sti-fade" appear mode="out-in">
+	<div class="sti-login">
+		<div class="row login-main">
+
+			<div class="col-md-5 col-md-offset-7">
+				
+				<md-whiteframe class="login-container" md-tag="div" md-elevation="12">
+					<div class="form-group">
+					    <input type="text" class="form-control" :placeholder="$t('commons.username')" v-model="username">
+					</div>
+					<div class="form-group">
+					    <input type="password" class="form-control" id="exampleInputPassword1" :placeholder="$t('commons.password')" v-model="password">
+					</div>
+					<div class="form-group">
+					    <input type="text" class="form-control" id="verification" :placeholder="$t('commons.verification')" v-model="verification">
+					    <img id="verificationPic" src alt="" title="点击更换">
+					</div>
+					<input type="submit" class="btn btn-default" @click="login" :value="$t('button.login')">
+					<div class="login-error">
+						{{info}}
+					</div>
+				</md-whiteframe>
+			</div>
+		</div>
+	</div>
+</transition>

@@ -1,0 +1,36 @@
+<aside class="content-aside" :class="{ fold: !unfold }">
+
+	<div class="aside-profile" v-if="unfold">
+	
+		<div class="profile-avatar">
+
+			<md-avatar class="avatar-large">
+
+				<img src="./resource/avatar.jpg" alt="People">
+			</md-avatar>
+		</div>
+		<div class="profile-info">
+				
+			{{$t('commons.welcome')}}, {{user.name}}
+		</div>
+		<div class="profile-buttons">
+				
+			<sti-icon icon="envelope" class="icon-small"></sti-icon>
+			<sti-icon icon="sign-out" class="icon-small"></sti-icon>
+		</div>
+	</div>
+	<nav>
+
+		<menu-list :unfold="unfold"></menu-list>
+	</nav>
+	<div class="aside-bottom">
+
+		<md-button class="bottom-icon md-icon-button md-raised md-mini md-clean md-primary"  @click.native="toggle">
+			
+			<sti-icon :icon="icon"></sti-icon>
+		</md-button>
+		<div class="bottom-content">
+			{{unfold ? $t('commons.footer') : ''}}
+		</div>
+ 	</div>
+</aside>

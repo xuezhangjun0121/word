@@ -1,0 +1,28 @@
+@normal-size: 18px;
+@small-size: 12px;
+
+.sti-icon {
+
+	color: rgba(255, 255, 255, 0.87);
+	font-size: @normal-size;
+	width: @normal-size;
+    min-width: @normal-size;
+    height: @normal-size;
+    min-height: @normal-size;
+    justify-content: center;
+    align-items: center;
+
+    &.icon-normal {
+
+    	text-transform: lowercase;
+    }
+
+    &.icon-small {
+
+    	font-size: @small-size;
+		width: @small-size;
+	    min-width: @small-size;
+	    height: @small-size;
+	    min-height: @small-size;
+    }
+}

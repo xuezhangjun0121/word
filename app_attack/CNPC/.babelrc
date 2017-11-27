@@ -1,0 +1,13 @@
+{
+	"presets": [
+		"es2015"
+	],
+	"plugins": [
+		"add-module-exports",
+		"transform-vue-jsx",
+		"transform-es3-member-expression-literals",
+		"transform-es3-property-literals",
+ 		"transform-async-to-generator",
+ 		"transform-object-rest-spread"
+	]
+}

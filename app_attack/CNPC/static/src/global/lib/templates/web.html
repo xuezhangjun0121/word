@@ -1,0 +1,11 @@
+<div class="sti-web" :class="theme">
+	
+	<!-- <sti-progress></sti-progress> -->
+	<router-view></router-view>
+	<sti-search></sti-search>
+	<% if (development) { %>
+		<sti-console></sti-console>
+	<% } %>
+	<!--<sti-loading></sti-loading>-->
+	<sti-confirm :title="confirmTitle" :content="confirmContent"></sti-confirm>
+</div>

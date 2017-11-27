@@ -1,0 +1,147 @@
+<div class="app-alert">
+    <div class="chart">
+        <sti-section class="alert-chart">
+            <div id="lastHour"></div>
+        </sti-section>
+        <sti-section class="alert-chart">
+            <div id="lastDay"></div>
+        </sti-section>
+        <sti-section class="alert-chart">
+            <div id="lastWeek"></div>
+        </sti-section>
+    </div>
+    <!-- 筛选框 -->
+    <div class="selectionModal">
+        <div class="modal fade selectionModel" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" data-backdrop="static">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <h4>表头设置</h4>
+                    <div class="modal-body">
+                        <div class="baseMsg">
+                            <p>基本信息</p>
+                            <ul ref="selectionBox">
+                                <li v-for="list in tableList2">{{ list.label }}</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" @click="cancelTable">取消</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" @click="sureTable">确定</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--详情框-->
+    <div class="detailModal">
+        <div class="modal detailModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" data-backdrop="static">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4>告警详情</h4>
+                    </div>
+                    <div class="modal-body" ref="detailMsg">
+                        <div class="addMsg" v-show="!warn">
+                            <div class="detail">
+                                <p>告警信息</p>
+                                <table border="1" cellspacing="0" cellpadding="0">
+                                    <tbody>
+                                        <tr>
+                                            <td>告警名称</td>
+                                            <td>{{ detail.cn_name }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>告警描述</td>
+                                            <td>{{ detail.vuln_desc }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>危害等级</td>
+                                            <td>{{ detail.vuln_level }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>规则类型</td>
+                                            <td>{{ detail.type }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>规则名称</td>
+                                            <td>{{ detail.name }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="line" v-show="!warn"></div>
+                        <div class="detailbaseMsg">
+                            <p>详细信息</p>
+                            <table border="1" cellspacing="0" cellpadding="0">
+                                <tbody>
+                                    <tr v-for="item in tableList2">
+                                        <td>{{ item.label }}</td>
+                                        <td><p class="alert-table-text">{{ baseDetail[item.id] }}</p></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!--<p v-show="warn" style="width:100%;height:200px;font-weight: 700;margin-top:10px;color:red;font-size: 18px;">! 不存在详情信息</p>-->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">返回</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="alert-box" ref="alertBox">
+        <form class="form-inline">
+            <div class="form-group">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".selectionModel">筛选表头</button>
+            </div>
+            <div class="form-group">
+                <label>{{$t('commons.threatLevel')}}</label>
+                <select class="form-control" v-model="level">
+                    <option value="">请选择</option>
+                    <option>高危</option>
+                    <option>中危</option>
+                    <option>低危</option>
+                    <option>危急</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>{{$t('commons.ipAddress')}}</label>
+                <input type="text" class="form-control" v-model="ip">
+            </div>
+            <div class="form-group">
+                <label>{{$t('commons.time')}}</label>
+                <date-picker :date="startTime" :option="timeoption" :min-date="start_min_date" :max-date="start_max_date" @change="stime" @oldtime="startoldtime" date-placeholder="开始时间"></date-picker> -
+                <date-picker :date="endTime" :option="timeoption" :min-date="end_min_date" :max-date="end_max_date" @change="etime" @oldtime="endoldtime" date-placeholder="结束时间"></date-picker>
+            </div>
+            <div class="form-group" style="margin-left:80px">
+                <sti-button @clickevent="search" type="primary">{{$t('button.search')}}</sti-button>
+                <a href="javascript:;" ref="changeHref"></a>
+                <sti-button type="primary" @clickevent="exported">{{$t('button.export')}}</sti-button>
+            </div>
+        </form>
+        <div class="alarm-table" ref="table1">
+            <sti-table v-if="alertTableShow" url="/alarm_display/" init-sort="" ref="table">
+                <sti-column width="80" class="detailbox">
+                    <template scope="colData">
+                        <div @click="showDetail(colData)">
+                            <!-- 详情框 -->
+                            <button type="button" class="btn  btn-success btn-xs" data-toggle="modal" data-target=".detailModal">查看详情</button>
+                        </div>
+                    </template>
+                </sti-column>
+                <!--设置选择列-->
+                <sti-column v-for="item in tableList1" :id="item.id" :label="item.label" :width="item.width" v-if="showTable">
+                    <template scope="colData">
+                        <p class="alert-table-text" :title="colData.data[item.id]" v-text="colData.data[item.id]"></p>
+                    </template>
+                </sti-column>
+            </sti-table>
+        </div>
+    </div>
+</div>

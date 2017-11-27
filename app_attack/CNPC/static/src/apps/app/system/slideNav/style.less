@@ -1,0 +1,30 @@
+.slide-nav-content{
+	width: 100%;
+	height: auto;
+    position: relative;
+    z-index: 2;
+    .md-list-item{
+    	.md-icon{
+    		display: none;
+    	}
+    }
+    .slide-nav-icon{
+    	transition: all 0.4s;
+    }
+    .md-list-item-expand{
+    	.md-list-item{
+    		.md-list-item-container{
+		    	padding-left: 47px;
+		    }
+    	}
+    }
+    .md-list-item-expand.md-active {
+	    position: relative;
+	    border-top: 1px #d4d3d3 solid;
+	    border-bottom: 1px #d4d3d3 solid;
+	    .slide-nav-icon{
+	    	transform: rotate(180deg);
+	    }
+
+	}
+}

@@ -1,0 +1,10 @@
+<li :class="navClass">
+
+	<md-button>
+		<a :href="fullUrl" @click.prevent="nav">
+		
+			<i class="fa fa-lg" :class="iconClass"></i>
+			<span><slot></slot></span>
+		</a>
+	</md-button>
+</li>

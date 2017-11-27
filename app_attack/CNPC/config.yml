@@ -1,0 +1,144 @@
+##########################
+# express服务器配置文件 v1.0
+##########################
+
+# 应用信息
+name: WEB攻击
+#name: WEB攻击检测与高危IP分析平台
+
+# 模板引擎
+#views: views/ejs
+#engine: ejs
+
+# 本地服务端口port，默认3000端口
+port: 8080
+
+# 以下请求将会被转发到代理服务器
+proxy:
+ # 开启代理
+ enable: true
+ # baseURL
+ baseUrl: /attack/app
+ # 目标服务器
+ # tan pc
+ target: http://192.168.147.128:8020/
+ # meng pc
+ # target: http://10.74.41.103:5000
+ # 匹配规则
+# rules:
+#   支持对象
+#  -
+#    url: /alarm_display
+#    enable: true
+ #  支持字符串
+#  - /login
+#  - /rule_display
+#  - /system_manage/confign
+#  - /system_manage/monitor
+#  - /system/config
+#  - /system/interface_display
+
+##########################
+# end express
+##########################
+
+##########################
+# gulp构建配置文件 v1.0
+##########################
+
+# 模板地址
+#template: ./layout.ejs
+# html文件输出 相对webpack编译后的地址
+#outputPath: ../../../views/ejs/index.ejs
+
+# 基础样式文件，不需要webpack处理
+base:
+ less: ./static/css/commons/less/sti.less
+ lessPath: ./static/css/commons/less/**/*.less
+ lessRoot: ./static/css/commons/less
+ cssDest: ./static/css/commons/css
+ css: ./static/css/commons/css/sti.css
+
+# 源文件
+src:
+ # 根路径
+ root: ./static/src
+ # 入口文件
+ index: ./static/src/index.es6
+ # webpack loader路径
+ #loaderMoules: node_modules
+ # alias变量
+ alias:
+  apps: ./static/src/apps
+  constant: ./static/src/constant
+  i18n: ./static/src/i18n
+  portals: ./static/src/portals
+  router: ./static/src/router
+  store: ./static/src/store
+  theme: ./static/src/theme
+  global: ./static/src/global
+  components: ./static/src/global/components
+  plugins: ./static/src/global/plugins
+  filters: ./static/src/global/filters
+  mixins: ./static/src/global/mixins
+  event: ./static/src/global/event
+  utils: ./static/src/global/utils
+  lib: ./static/src/global/lib
+  StiVue: ./static/src/global/lib/StiVue
+  http: ./static/src/global/utils/http
+  directives: ./static/src/global/directives
+  config: ./static/src/config
+# 模块alias
+ moduleAlias:
+  gridstack: gridstack/dist
+  jquery-ui: jquery-ui/ui
+  vue: vue/dist/vue.js
+  ejs: ejs/ejs.js
+  validation: jquery-validation
+  jqGridjs: jqGrid/js/jquery.jqGrid.min.js
+  highchart: highcharts/highcharts.js
+  highstock: highcharts/highstock.js
+  bootstrap: bootstrap/dist/js/bootstrap.min.js
+  highchartmore: highcharts/highcharts-more.js 
+  highchart3d: highcharts/highcharts-3d.js 
+ # 第三方库，单独打包
+ vendor:
+  - utils/classList
+  - vue
+  - vuex
+  - vue-material
+  - vue-router
+  - vue-i18n
+  - crypto-js
+  - three
+  - lodash
+  - jquery
+  - jqGridjs
+  - fuse.js
+  - gridstack/gridstack
+  - validation/dist/additional-methods
+  - validation/dist/localization/messages_zh
+  - highcharts
+  - moment
+
+# 开发模式下发布路径
+dev:
+ root: ./attack/static/dist
+ publicPath: /attack/static/dist/
+
+# 发布模式下发布路径
+pro:
+ root: ./attack/static/dist
+ publicPath: /attack/static/dist/
+
+# sftp信息
+sftp:
+ host:
+ port:
+ user:
+ pass:
+ remotePath:
+
+##########################
+# end gulp
+##########################

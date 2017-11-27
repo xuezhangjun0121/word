@@ -1,0 +1,28 @@
+<div class="sti-table-pagination">
+
+	<!--<ul class="tools-section">
+
+		<li class="pagination-button" v-if="toolbar.filter" @click="switchFilter">
+			<i class="fa fa-filter"></i>
+		</li>
+	</ul>-->
+
+	<ul class="pagination-section">
+		
+		<li>
+			<input type="text" name="" v-model="curPage" @keyup.enter="turn2page">
+		</li>
+		<li>
+			{{totalPage}}
+		</li>
+		<li class="pagination-button" :class="{ disabled: curPage == 1 }" @click="pre">
+			&lt;
+		</li>
+		<li class="pagination-button" :class="{ disabled: curPage == totalPage }" @click="next">
+			&gt;
+		</li>
+		<li>
+			{{count > 0 ? count + '条数据' : '暂无数据'}}
+		</li>
+	</ul>
+</div>

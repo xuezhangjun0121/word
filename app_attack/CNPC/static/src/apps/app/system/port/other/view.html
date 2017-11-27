@@ -1,0 +1,52 @@
+<div class="port_other">
+    <!--弹框-->
+    <md-dialog-alert
+            :md-title="alert.title"
+            :md-content-html="alert.contentHtml"
+            :md-ok-text="alert.ok"
+            @open="onOpen"
+            @close="onClose"
+            ref="dialog1">
+    </md-dialog-alert>
+
+    <div style="padding: 15px">
+        <div class="port-data">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>数据转发</th>
+                </tr>
+                </thead>
+            </table>
+            <form class="form-inline text-right">
+                <div class="form-group">
+
+                    <sti-button @clickevent="addData">{{$t('button.add')}}</sti-button>
+
+                    <!--<sti-button @clickevent="editData">{{$t('button.edit')}}</sti-button>-->
+                    <sti-button @clickevent="deleteData">{{$t('button.delete')}}</sti-button>
+                </div>
+            </form>
+            <sti-table
+
+                    :datas="datasOther"
+                    init-sort="port"
+                    ref="tableData"
+                    @check="otherAdd"
+            >
+                <!--设置选择列-->
+                <sti-column id="id" width="50" type="checkbox"></sti-column>
+                <sti-column id="ip" label="IP地址" filterable></sti-column>
+                <sti-column id="port" label="端口" filterable></sti-column>
+                <sti-column id="queuename" label="列队名" filterable></sti-column>
+                <sti-column id="operate" width="100" label="编辑">
+                    <!--&lt;!&ndash;设置模板列&ndash;&gt;-->
+                    <template scope="colData">
+
+                        <i class="fa fa-pencil-square-o" aria-hidden="true" @click="editData(colData)"></i>
+                    </template>
+                </sti-column>
+            </sti-table>
+        </div>
+    </div>
+</div>

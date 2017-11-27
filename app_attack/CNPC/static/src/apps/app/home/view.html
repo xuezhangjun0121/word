@@ -1,0 +1,60 @@
+<div class="app-home">
+    <div class="devicetype">
+        <div class="adress">
+            <!-- <p>App名 ：{{ app }}</p> -->
+            <!-- <p>IP地址 ：{{ ip }}</p> -->
+            <!-- <p>今日产生告警 ：{{ alarm_count }} 条</p>
+            <p>今日读取数据 ：{{ read_count }} 条</p> -->
+            <p>
+                <i class="fa fa-database" aria-hidden="true"></i>
+                <span class="cur-day-read">昨日读取数据 : <b>{{ read_count }}</b> 条</span>&nbsp;&nbsp;&nbsp;
+                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                <span class="cur-day-alarm">今日产生告警 : <b>{{ alarm_count }}</b> 条</span>
+            </p>
+        </div>
+        <div class="title">
+            <span class="status">引擎状态</span>
+            <span class="statusframe" v-bind:class="{'safe':status,'danger':!status}"></span>
+        </div>
+    </div>
+    <div class="chartbox">
+        <sti-section class="home-chart">
+            <div id="usecpu"></div>
+            <div class="data-loading" v-show="loadCpu">
+                <div class="loading-icon">
+                    <md-spinner md-indeterminate></md-spinner>
+                </div>
+            </div>
+        </sti-section>
+    </div>
+    <div class="chartbox">
+        <sti-section class="home-chart">
+            <div id="usespeed"></div>
+            <div class="data-loading" v-show="loadSpeed">
+                <div class="loading-icon">
+                    <md-spinner md-indeterminate></md-spinner>
+                </div>
+            </div>
+        </sti-section>
+    </div>
+    <div class="chartbox">
+        <sti-section class="home-chart">
+            <div id="usememory"></div>
+            <div class="data-loading" v-show="loadMemory">
+                <div class="loading-icon">
+                    <md-spinner md-indeterminate></md-spinner>
+                </div>
+            </div>
+        </sti-section>
+    </div>
+    <div class="chartbox">
+        <sti-section class="home-chart">
+            <div id="usedisk"></div>
+            <div class="data-loading" v-show="loadDisk">
+                <div class="loading-icon">
+                    <md-spinner md-indeterminate></md-spinner>
+                </div>
+            </div>
+        </sti-section>
+    </div>
+</div>

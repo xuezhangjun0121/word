@@ -1,0 +1,106 @@
+@header-height: 50px;
+
+.sti-header {
+
+	height: @header-height;
+	line-height: @header-height;
+	width: 100%;
+	position: fixed;
+	top: 0;
+	z-index: 8;
+	transition: background-color .4s cubic-bezier(.25,.8,.25,1);
+
+	.header-nav {
+
+		height: 100%;
+		padding: 0 15px;
+		display: flex;
+		align-items: center;
+		font-size: 13px;
+		font-weight: normal;
+		.navbar-nav{
+			margin-right: 12px;
+			li:hover a{
+				background-color: rgba(0,0,0,0.2);
+			}
+		}
+		li{
+			margin-top: 0;
+		}
+		img{
+			width: 30px;
+			border-style: none;
+			vertical-align: middle;
+			border: 0;
+			margin-right: 10px;
+			border-radius: 50%;
+		}
+
+		.user-image{
+			width: 25px;
+		}
+		a.dropdown-toggle{
+			text-decoration: none;
+			color: #fff;
+		    padding: 0px 12px;
+		    line-height: 50px;
+		    box-sizing: border-box;
+		}
+		a.dropdown-toggle:hover,a.dropdown-toggle:active{
+			background-color: #196fb1;
+			color: #fff;
+		}
+		a.dropdown-toggle:visited{
+			background-color: #08c;
+		}
+		a.login-out{
+			font-size: 14px;
+			font-weight: normal;
+			padding: 15px 12px;
+			color: #fff;
+		}
+		a.login-out:hover{
+			background-color: #196fb1;
+			color: #fff
+		}
+		button{
+			overflow: visible;
+		}
+
+		.nav-title {
+			
+			cursor: pointer;
+			font-size: 18px;
+			color: #fff;
+		}
+
+		.personal-msg{
+			position: absolute;
+			top: 50px;
+			right: 15px;
+			border: 1px solid #eaeaea;
+			border-top: 0px;
+
+			>div{
+				line-height: 45px;
+				padding: 0 10px;
+				text-align: center;
+				color: #000;
+				border-top: 1px solid #eaeaea;
+
+				&:hover{
+					cursor: pointer;
+					background-color: rgba(0,0,0,0.2);
+				}
+			}
+		}
+
+		.fade-enter-active, .fade-leave-active {
+			transition: opacity .5s
+		}
+
+		.fade-enter, .fade-leave-to /* .fade-leave-active in <2.1.8 */ {
+			opacity: 0
+		}
+	}
+}

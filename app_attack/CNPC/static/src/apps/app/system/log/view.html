@@ -1,0 +1,66 @@
+<div class="system-log">
+
+    <div style="padding: 15px">
+
+        <!--弹框-->
+        <md-dialog-alert
+                :md-title="alert.title"
+                :md-content-html="alert.contentHtml"
+                :md-ok-text="alert.ok"
+                @open="onOpen"
+                @close="onClose"
+                ref="dialog1">
+        </md-dialog-alert>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>系统日志</th>
+            </tr>
+            </thead>
+        </table>
+
+        <form class="form-inline text-right">
+
+            <div class="form-group">
+                <label>{{$t('commons.time')}}</label>
+                <date-picker :date="startTime" :option="timeoption" :min-date="start_min_date" :max-date="start_max_date" @change="stime" @oldtime="startoldtime" date-placeholder="开始时间"></date-picker> -
+                <date-picker :date="endTime" :option="timeoption" :min-date="end_min_date" :max-date="end_max_date" @change="etime" @oldtime="endoldtime" date-placeholder="结束时间"></date-picker>
+            </div>
+
+            <div class="form-group">
+                <sti-button @clickevent="searchLog">{{$t('button.search')}}</sti-button>
+            </div>
+            <div class="form-group">
+                <sti-button @clickevent="search">{{$t('button.reset')}}</sti-button>
+            </div>
+        </form>
+
+        <sti-table
+
+                url="/system_log/"
+                ref="searchLog"
+                @table-expand="detailShow"
+        >
+            <!--展开列-->
+            <sti-column id="id" width="50" type="expand">
+                <template scope="colData">
+                    <b>详细信息</b>
+                    <div class="detail">
+                        <dl>
+                            <dt>时间</dt>
+                            <dd>{{ colData.data.createTime }}</dd>
+                            <dt>等级</dt>
+                            <dd>{{ colData.data.threat_level }}</dd>
+                            <dt>内容</dt>
+                            <dd>{{ colData.data.log }}</dd>
+                        </dl>
+                    </div>
+                </template>
+            </sti-column>
+            <sti-column id="createTime" label="时间" filterable></sti-column>
+            <sti-column id="threat_level" label="等级" :compare="compare" filterable></sti-column>
+        </sti-table>
+    </div>
+
+</div>

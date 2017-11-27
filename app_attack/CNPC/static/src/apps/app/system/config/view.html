@@ -1,0 +1,156 @@
+<!--常规配置-->
+
+
+<div class="system-config">
+
+    <div style="padding: 15px">
+        <!--数据库存储管理-->
+        <!--弹框-->
+        <md-dialog-alert
+                :md-title="alert.title"
+                :md-content-html="alert.contentHtml"
+                :md-ok-text="alert.ok"
+                @open="onOpen"
+                @close="onClose"
+                ref="dialog1">
+        </md-dialog-alert>
+        <md-dialog
+                :md-close-on-esc="outside"
+                :md-click-outside-to-close="outside"
+                ref="dialog2">
+            <md-dialog-title>请选择数据接入类型</md-dialog-title>
+
+            <md-dialog-content>
+                <md-radio v-model="topic" id="radio1" name="group2" md-value="hdfs" class="md-primary">HDFS</md-radio>
+                <md-radio v-model="topic" id="radio2" name="group2" md-value="kafka" class="md-primary">KAFKA</md-radio>
+            </md-dialog-content>
+
+            <md-dialog-actions>
+                <sti-button @clickevent="closeDialog('dialog2')">取消</sti-button>
+                <sti-button @clickevent="closeDialog2('dialog2')">确认</sti-button>
+            </md-dialog-actions>
+        </md-dialog>
+        <md-dialog-alert
+                :md-title="alert.title"
+                :md-content-html="alert.contentHtml"
+                :md-ok-text="alert.ok"
+                @open="onOpen"
+                @close="onClose2"
+                ref="dialog3">
+        </md-dialog-alert>
+
+        <div class="config-table">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>数据库存储管理</th>
+                </tr>
+                </thead>
+                <br>
+
+                <form class="form-inline store">
+                    <div class="form-group">
+                        <label>数据库存储时间</label>
+                        <div class="input-group">
+                            <select class="form-control" v-model="days_limit">
+                                <option value="">请选择</option>
+                                <option v-for="length in lengthArr">{{length}}</option>
+                            </select>
+                            <span class="input-group-addon">天</span>
+                        </div>
+
+                    </div>
+                    <br><br>
+
+                    <div class="form-group">
+                        <label for="max">数据库存储上限</label>
+                        <div class="input-group">
+                            <input type="number" class="form-control" id="max" v-model="rate.upper_limit">
+                            <span class="input-group-addon">%</span>
+                        </div>
+                    </div>
+                    <br><br>
+
+                    <div class="form-group">
+                        <label for="min">超限存储删除后余量</label>
+                        <div class="input-group">
+                            <input type="number" class="form-control" id="min" v-model="rate.after_delete">
+                            <span class="input-group-addon">%</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <sti-button class="md-raised" @clickevent="submitRate">{{$t('button.submit')}}</sti-button>
+                    </div>
+                </form>
+            </table>
+        </div>
+
+        <!--APP注册管理-->
+        <div class="config-table">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>APP注册管理</th>
+                </tr>
+                </thead>
+            </table>
+            <form class="form-inline text-right">
+
+                <router-link to="/system/config/addapp">
+                    <sti-button>{{$t('button.add')}}</sti-button>
+                </router-link>
+
+                <!--<sti-button @clickevent="editApp">{{$t('button.edit')}}</sti-button>-->
+                <sti-button @clickevent="deleteApp">{{$t('button.delete')}}</sti-button>
+            </form>
+
+            <sti-table
+
+                    url="/system_manage/"
+                    ref="tableApp"
+                    @check="add"
+            >
+                <!--设置选择列-->
+                <sti-column id="id" width="50" type="checkbox"></sti-column>
+                <sti-column id="username" label="APP" filterable></sti-column>
+                <sti-column id="ip" label="IP地址" filterable>
+                    <template scope="colData">
+                        <!--http://11.11.127.99:8020/attack/ngsoc/-->
+                        <a :href="colData.data.file_path" target="_blank" style="text-decoration: none">{{colData.data.ip}}</a>
+                    </template>
+                </sti-column>
+                <sti-column id="port" label="端口" width="100" filterable></sti-column>
+                <sti-column id="file_path" label="请求路径" filterable></sti-column>
+                <sti-column id="operate" label="APP引擎服务启停管理">
+                    <template scope="colData">
+                        <!--<sti-switch @clickevent="tableSwitch(colData)" type="primary" :checked-status="formatter(colData)"></sti-switch>-->
+                        <sy-switch
+                                v-if="reset"
+                                @change="tableSwitch(colData)"
+                                :checked-status="formatter(colData)"
+                                type="md-primary">
+                        </sy-switch>
+                    </template>
+                </sti-column>
+                <sti-column id="topic" label="数据来源" width="100" filterable></sti-column>
+                <sti-column id="operate" width="100" label="编辑">
+                    <!--&lt;!&ndash;设置模板列&ndash;&gt;-->
+                    <template scope="colData">
+
+                        <i class="fa fa-pencil-square-o" aria-hidden="true" @click="editApp(colData)"></i>
+                    </template>
+                </sti-column>
+            </sti-table>
+        </div>
+    </div>
+
+    <div class="loading-table"
+         v-show="loading">
+        <md-spinner
+                :md-size="60"
+                :md-stroke="1"
+                md-indeterminate
+                class="config-spinner">
+        </md-spinner>
+    </div>
+</div>

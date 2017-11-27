@@ -1,0 +1,64 @@
+<div class="app-system">
+
+    <div class="row">
+        <!-- class="col-md-2"-->
+        <div class="row-left">
+            <md-list>
+                <md-list-item>
+                    <router-link to="/system/config" linkActiveClass="router-link-active">
+                        {{$t('button.config')}}
+                    </router-link>
+                </md-list-item>
+
+                <!--<md-list-item>
+                    <router-link to="/system/user">
+                        {{$t('button.user')}}
+                    </router-link>
+                </md-list-item>-->
+
+                <sy-slide>
+                    <span slot="head">{{$t('button.port')}}</span>
+                    <template slot="list">
+                        <md-list>
+                            <md-list-item>
+                                <router-link to="/system/port/hdfs">HDFS数据接入</router-link>
+                            </md-list-item>
+                            <md-list-item>
+                                <router-link to="/system/port/kafka">KAFKA数据接入</router-link>
+                            </md-list-item>
+                            <md-list-item>
+                                <router-link to="/system/port/other">数据转发</router-link>
+                            </md-list-item>
+                        </md-list>
+                    </template>
+                </sy-slide>
+
+                <md-list-item>
+                    <router-link to="/system/log">
+                        {{$t('button.log')}}
+                    </router-link>
+                </md-list-item>
+            </md-list>
+        </div>
+        <div class="col-md-10">
+            <router-view></router-view>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,64 @@
+<div class="app-rule">
+	<div class="form-inline text-right">
+		<div class="form-group">
+			<label>{{$t('commons.rule')}}</label>
+			<input type="text" class="form-control" id="rule" v-model="name">
+		</div>
+		<div class="form-group">
+			<label>{{$t('commons.threatLevel')}}</label>
+			<select class="form-control" v-model="vuln_level">
+				<option value="">请选择</option>
+				<option v-for="level in levels">{{level}}</option>
+			</select>
+		</div>
+
+		<div class="form-group">
+			<sti-button @clickevent="searchRule">{{$t('button.search')}}</sti-button>
+		</div>
+	</div>
+
+	<div class="rule-table">
+		<sti-table
+		
+			url="/rule_display/"
+			ref="tableRule"
+			@table-expand="detailShow"
+		>
+			<!--设置展开列-->
+			<sti-column id="vuln_desc" width="50" type="expand">
+
+				<template scope="colData">
+
+					<b>详细信息</b>
+					<div class="detail">
+						<dl>
+							<dt>威胁描述</dt>
+							<dd>{{ colData.data.vuln_desc }}</dd>
+							<!--<dt>潜在危害</dt>
+							<dd>{{ colData.data.vuln_harm }}</dd>
+							<dt>解决方案</dt>
+							<dd>{{ colData.data.solution }}</dd>-->
+						</dl>
+					</div>
+				</template>
+			</sti-column>
+			<sti-column id="name" label="规则名称" filterable></sti-column>
+			<sti-column id="vuln_level" label="威胁等级" :compare="compare" filterable></sti-column>
+			<sti-column id="vuln_type" label="威胁类型" :compare="compare" filterable></sti-column>
+			<!--<sti-column id="operate" label="是否启用">
+				&lt;!&ndash;设置模板列&ndash;&gt;
+				<template scope="colData">
+					&lt;!&ndash;:checked-status.sync="colData.data.enabled"&ndash;&gt;
+					<sti-switch @clickevent="tableSwitch(colData)" type="primary" :checked-status="formatter(colData)"></sti-switch>
+				</template>
+			</sti-column>-->
+			<!--<sti-column id="operate" width="100" label="操作">
+				&lt;!&ndash;设置模板列&ndash;&gt;
+				<template scope="colData">
+
+					<i class="fa fa-mobile fa-lg" aria-hidden="true" @click="phone(colData)"></i>
+				</template>
+			</sti-column>-->
+		</sti-table>
+	</div>
+</div>

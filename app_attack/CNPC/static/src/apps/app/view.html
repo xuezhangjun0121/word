@@ -1,0 +1,30 @@
+<div class="sti-container">
+	<!--头部区域-->
+	<app-header></app-header>
+	<!--导航区域-->
+	<app-nav-bar>
+		<app-nav id="home" icon="home">{{$t('commons.homeLabel')}}</app-nav>
+		<app-nav id="alert" icon="exclamation-triangle" url="/alert">{{$t('commons.alertLabel')}}</app-nav>
+		<!-- 新增高危ip、行为分析 -->
+        <app-nav id="ip" icon="exclamation-triangle" url="/ip">{{$t('commons.ipLabel')}}</app-nav>
+        <app-nav id="assay" icon="exclamation-triangle" url="/assay">{{$t('commons.assayLabel')}}</app-nav>
+
+        <app-nav id="rule" icon="list" url="/rule">{{$t('commons.ruleLabel')}}</app-nav>
+		<app-nav id="system" icon="cogs" url="/system">{{$t('commons.systemLabel')}}</app-nav>
+	</app-nav-bar>
+	<!--主视图区域-->
+	<div class="sti-content">
+		<main id="content-main" class="content-main" style="padding: 0">
+			<transition name="sti-fade" mode="out-in">
+				<router-view></router-view>
+			</transition>
+		</main>
+		
+	</div>
+	<!--侧边快捷面板-->
+	<app-side ref="rightSidenav" />
+	<!--提示区域-->
+	<sti-notice></sti-notice>
+	<!-- noty提示框 -->
+	<!--<notifications />-->
+</div>

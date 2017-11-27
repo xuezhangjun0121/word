@@ -1,0 +1,18 @@
+<div class="sti-table-filter" :class="{ active: filterabled}">
+		
+	<div class="filter-items">
+		
+		<span v-for="(filter, index) in filters" track-by="filter.id">
+			{{filter.label}} : {{filter.content}}
+			<i class="fa fa-close" @click="removeFilter(filter, index)">
+			</i>
+		</span>
+	</div>
+	<div class="filter-input">
+		
+		<input type="text" 
+			v-model="filterInput" 
+			:placeholder="filterLabel" 
+			@keyup.enter="addFilter">
+	</div>
+</div>	

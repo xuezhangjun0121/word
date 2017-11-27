@@ -1,0 +1,61 @@
+<div class="user-edituser">
+
+    <!--弹框-->
+    <md-dialog-alert
+            :md-title="alert.title"
+            :md-content-html="alert.contentHtml"
+            :md-ok-text="alert.ok"
+            @open="onOpen"
+            @close="onClose"
+            ref="dialog1">
+    </md-dialog-alert>
+
+    <md-dialog-alert
+            :md-title="alert.title"
+            :md-content-html="alert.contentHtml"
+            :md-ok-text="alert.ok"
+            @open="onOpen"
+            @close="onClose2"
+            ref="dialog2">
+    </md-dialog-alert>
+
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-5">
+            <sti-section>
+                <div style="padding: 15px">
+                    <h2>编辑用户</h2>
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label for="username" class="col-sm-2 control-label">姓名</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="username" v-model="item.username">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="name" class="col-sm-2 control-label">角色</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="name" v-model="item.name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="perm_data" class="col-sm-2 control-label">权限</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="perm_data" v-model="item.perm_data">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-7">
+                                <router-link to="/system/user">
+                                    <sti-button>{{$t('button.return')}}</sti-button>
+                                </router-link>
+                                <sti-button @clickevent="submitUser">{{$t('button.confirm')}}</sti-button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </sti-section>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+</div>

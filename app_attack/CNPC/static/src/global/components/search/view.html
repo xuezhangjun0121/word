@@ -1,0 +1,28 @@
+<div class="sti-search">
+	
+	<transition name="sti-fadeInDown" appear>
+		
+		<div class="search-container" tabindex="0" v-if="active" ref="container">
+ 
+			<div class="container-input" :class="{'focus-input': focused}">
+				
+				<input v-model="param" class="form-control" :placeholder="$t('commons.search')" 	@click.stop 
+					@focus="focus"
+					@keyup.up="up" 
+					@keyup.down="down" 
+					@keyup.enter="enter"/>
+				<ul class="form-control container-drop" v-if="focused && contents.length > 0">
+
+					<li 
+						:class="{ active: $index == index}" 
+						@mouseover="over($index)"
+						v-for="(content, $index) in contents" :key="$index" 
+						>
+						<a v-href="parent.path" class="drop-menu fa" v-for="(parent, $index) in content.parents" :key="$index" v-html="parent.text">
+						</a><a class="drop-menu fa" v-href="content.path" v-html="content.text"></a>
+					</li>
+				</ul>
+			</div>
+		</div>	
+	</transition>
+</div>

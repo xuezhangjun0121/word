@@ -1,0 +1,1 @@
+{"version":3,"file":"config.js","sources":["webpack:///./static/src/config.json"],"sourcesContent":["module.exports = {\n\t\"TITLE\": \"STI-WEB\"\n};\n\n\n//////////////////\n// WEBPACK FOOTER\n// ./static/src/config.json\n// module id = 128\n// module chunks = 18"],"mappings":";;;;;;;;;;AAAA;AACA;AACA;;;;","sourceRoot":""}
